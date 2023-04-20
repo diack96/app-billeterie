@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MonTicket</title>
+  <link rel="stylesheet" type="text/css" href="./css/reset.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Petit+Formal+Script" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <img class="logo" src="https://content.codecademy.com/courses/vue-instances/ticket_logo.svg" alt="logo">
+      <h1>MonTicket</h1>
+    </header>
+    <form v-on:reset="resetFields" v-on:submit.prevent="submitForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="first-name">Nom</label>
+          <input type="text" id="first-name" v-model.trim="firstName" />
+        </div>
+        <div class="form-field">
+          <label for="last-name">Prenom</label>
+          <input type="text" id="last-name" v-model.trim="lastName" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="text" id="email" v-model.trim="email" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="ticket-quantity">Nombre de tickets</label>
+          <select id="ticket-quantity" v-model.number="ticketQuantity">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <legend>Categorie du ticket</legend>
+          <div>
+            <input type="radio" id="general" value="general" v-model="ticketType">
+            <label for="general">Economique</label>
+          </div>
+          <div>
+            <input type="radio" id="vip" value="vip" v-model="ticketType">
+            <label for="vip">VIP</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row checkbox">
+        <fieldset>
+          <legend>Comment avez vous entendu parler de nous?</legend>
+          <div>
+            <input type="checkbox" id="friend" value="friend" v-model="referrals">
+            <label for="friend">Entourage</label>
+          </div>
+          <div>
+            <input type="checkbox" id="publication" value="publication" v-model="referrals">
+            <label for="publication">Publications</label>
+          </div>
+          <div>
+            <input type="checkbox" id="social-media" value="social" v-model="referrals">
+            <label for="social-media">Reseaux sociaux</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="form-row vertical">
+        <label for="requests">Code promo</label>
+        <textarea id="requests" v-model.trim="specialRequests"></textarea>
+      </div>
+      <div class="form-row vertical agreement checkbox">
+        <fieldset>
+          <legend>Message de confirmation</legend>
+          <p>Moi, {{ fullName }}, je veux acheter {{ ticketDescription }}. I understand that all ticket sales are final.</p>
+          <input type="checkbox" name="agreement" id="agree" v-model="purchaseAgreementSigned" />
+          <label for="agree">J'accepte</label>
+        </fieldset>
+      </div>
+      <div class="form-row vertical">
+        <label for="signature">Signature</label>
+        <input id="signature" class="signature" v-model="signature"/>
+      </div>
+      <div>
+        <button type="reset" class="reset">Reset</button>
+        <button type="submit" v-bind:disabled="!formIsValid">Confirm Tickets</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
